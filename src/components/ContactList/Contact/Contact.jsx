@@ -1,9 +1,15 @@
 import { FaPhone } from 'react-icons/fa6';
 import { IoPerson } from 'react-icons/io5';
 import s from './Contact.module.css';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../../redux/contactsSlice';
 
-const Contact = ({ item, onDelete }) => {
+const Contact = ({ item }) => {
   const { name, number, id } = item;
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(deleteContact(id));
+  };
   return (
     <>
       <li className={s.li_wrapper}>
@@ -20,7 +26,9 @@ const Contact = ({ item, onDelete }) => {
           </p>
         </div>
 
-        <button onClick={() => onDelete(id)}>Delete</button>
+        <button type="button" onClick={() => handleDelete(id)}>
+          Delete
+        </button>
       </li>
     </>
   );
